@@ -38,8 +38,8 @@ jobs:
       run: |
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
         ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST "
-        cd /var/www/html/your-laravel-repo && 
+        cd /var/www/html/ylaravel-project && 
         git pull origin main && 
-        composer install --prefer-dist --no-interaction --no-dev &&
+        composer install &&
         php artisan migrate --force &&
         sudo systemctl restart httpd"
