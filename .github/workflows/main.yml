@@ -37,7 +37,7 @@ jobs:
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
       run: |
         echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-        ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST "
+        ssh -i $SSH_PRIVATE_KEY $REMOTE_USER@$REMOTE_HOST "
         cd /var/www/html/ylaravel-project && 
         git pull origin main && 
         composer install &&
