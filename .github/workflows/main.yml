@@ -1,0 +1,45 @@
+name: Laravel CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+        extensions: mbstring, xml, curl
+
+    - name: Install dependencies
+      run: composer install --prefer-dist --no-interaction --no-scripts
+
+    - name: Run tests
+      run: php artisan test
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy to EC2
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+        REMOTE_USER: ${{ secrets.REMOTE_USER }}
+      run: |
+        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+        ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST "
+        cd /var/www/html/your-laravel-repo && 
+        git pull origin main && 
+        composer install --prefer-dist --no-interaction --no-dev &&
+        php artisan migrate --force &&
+        sudo systemctl restart httpd"
