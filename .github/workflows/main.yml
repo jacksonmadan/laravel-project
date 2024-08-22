@@ -42,10 +42,9 @@ jobs:
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
       run: |
-        echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-        ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST "
+        ssh -i "$SSH_PRIVATE_KEY"$REMOTE_USER@$REMOTE_HOST "
         cd /var/www/html/your-laravel-repo && 
         git pull origin main && 
-        composer install --prefer-dist --no-interaction --no-dev &&
+        composer install &&
         php artisan migrate --force &&
         sudo systemctl restart httpd"
