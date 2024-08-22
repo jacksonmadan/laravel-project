@@ -54,7 +54,7 @@ jobs:
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
       run: |
-        ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
+        ssh -i StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
           cd /var/www/html/your-laravel-repo || exit
           git pull origin main || exit
           composer install --no-dev || exit
