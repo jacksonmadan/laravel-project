@@ -31,20 +31,29 @@ jobs:
     - name: Run tests
       run: php artisan test
 
+  
   deploy:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.4
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
     - name: Deploy to EC2
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         REMOTE_USER: ${{ secrets.REMOTE_USER }}
       run: |
-        ssh -i "$SSH_PRIVATE_KEY"$REMOTE_USER@$REMOTE_HOST "
-        cd /var/www/html/your-laravel-repo && 
-        git pull origin main && 
-        composer install &&
-        php artisan migrate --force &&
-        sudo systemctl restart httpd"
+        ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
+          cd /var/www/html/your-laravel-repo || exit
+          git pull origin main || exit
+          composer install --no-dev || exit
+          php artisan migrate --force || exit
+          sudo systemctl restart httpd || exit
+        EOF
