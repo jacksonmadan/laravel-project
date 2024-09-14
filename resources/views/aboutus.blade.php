@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+hi i am ankush
 <div class="container" style="margin-top: 40px;">
 <h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">About Us</h1>
 
