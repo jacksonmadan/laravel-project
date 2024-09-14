@@ -1,4 +1,3 @@
-<!-- resources/views/book-bike.blade.php -->
 @extends('layouts.app')
 
 @section('content')
@@ -6,9 +5,9 @@
     <!-- Bike Details Section -->
     <div style="flex: 1; color: white;">
         <h2 style="font-size: 32px; margin-bottom: 10px;">{{ $bike->name }}</h2>
-        <p style="font-size: 18px; margin-bottom: 8px;"><strong>Price:</strong> ${{ $bike->price }}</p>
+        <p style="font-size: 18px; margin-bottom: 8px;"><strong>Price:</strong> ${{ $bike->rate_per_hour}} /perHour</p>
         <p style="font-size: 18px; margin-bottom: 8px;"><strong>Description:</strong> {{ $bike->description }}</p>
-        <p style="font-size: 18px; margin-bottom: 16px;"><strong>Available:</strong> {{ $bike->available ? 'Yes' : 'No' }}</p>
+        <!-- <p style="font-size: 18px; margin-bottom: 16px;"><strong>Available:</strong> {{ $bike->available ? 'Yes' : 'No' }}</p> -->
         <a href="#" class="btn btn-primary" style="font-size: 18px; padding: 10px 20px;">Book Now</a>
     </div>
 
@@ -22,8 +21,9 @@
             </div>
             <div class="form-group" style="margin-bottom: 10px;">
                 <label for="insurance"><strong>Insurance:</strong></label>
-                <input type="checkbox" id="insurance" class="form-control" style="margin-left: 10px;">
+                <input type="checkbox" id="insurance" style="margin-left: 10px;">
             </div>
+            <p style="margin-top: 10px;"><strong>Security Amount:</strong> $3000.00</p>
             <p style="margin-top: 10px;"><strong>Total Cost:</strong> $<span id="totalCost">0.00</span></p>
             <button type="button" class="btn btn-secondary" style="margin-top: 15px;" onclick="calculateCost()">Calculate</button>
         </form>
@@ -41,15 +41,15 @@
 
 <script>
     function calculateCost() {
-        var rentalDays = document.getElementById('rentalDays').value;
-        var pricePerDay = {{ $bike->price }};
+        var rentalDays = parseInt(document.getElementById('rentalDays').value) || 0;
+        var pricePerHour = {{ $bike->rate_per_hour }};
         var insuranceChecked = document.getElementById('insurance').checked;
-        var insuranceCost = insuranceChecked ? 10 : 0; // Assuming $10 insurance per rental
+        var insuranceCost = insuranceChecked ? 10 : 0; // Assuming $10 insurance per day
+        var securityAmount = 3000; // Mandatory security amount
 
-        var totalCost = (rentalDays * pricePerDay) + (insuranceChecked ? insuranceCost * rentalDays : 0);
+        var totalCost = (rentalDays * pricePerHour * 24) + (insuranceCost * rentalDays) + securityAmount;
         document.getElementById('totalCost').innerText = totalCost.toFixed(2);
     }
 </script>
-
 
 @endsection

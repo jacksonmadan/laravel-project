@@ -33,7 +33,7 @@ class RegistrationController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:60',
-            'email' => 'required|string|email|max:100|unique:users',
+            'email' => 'required|string|email|max:100|unique:user',
             'address' => 'required|string|max:100',
             'dob' => 'required|date',
             'gender' => 'required|in:M,F,O',

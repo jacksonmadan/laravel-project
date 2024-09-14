@@ -1,32 +1,32 @@
 @extends('layouts.app')
 
 @section('content')
-<div style="margin-top: 20px; padding: 20px; background-color: #000000; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);">
-    <h1 style="font-size: 2.5rem; margin-bottom: 20px; color: #ffffff; text-align: center;">Partner with Us</h1>
+<div class="container" style="margin-top: 40px;">
+<h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">Partner With Us</h1>
 
     <!-- Display Flash Messages -->
     @if(session('status'))
-        <div class="alert alert-success" role="alert" style="margin-bottom: 20px; color: #000000; background-color: #28a745;">
+        <div class="alert alert-success" role="alert" style="margin-bottom: 20px; color: #000000; background-color: #fffff;">
             {{ session('status') }}
         </div>
     @endif
 
     <div style="margin-bottom: 40px; padding: 20px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #007bff; padding-bottom: 10px;">Welcome to Bike Lelo Partnerships</h2>
+        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #007bff; padding-bottom: 10px;"><i class="fa fa-smile"></i>Welcome to Bike Lelo Partnerships</h2>
         <p style="font-size: 16px; color: #cccccc;">
             At Bike Lelo, we value our partnerships and are excited to collaborate with businesses and individuals who share our passion for providing top-quality bike rental services. As a partner, you will be part of a dynamic network committed to excellence and customer satisfaction.
         </p>
         <!-- Be a Partner Button -->
         <div style="text-align: center;">
-            <button type="button" style="display: inline-block; padding: 15px 30px; font-size: 18px; color: #ffffff; background-color: #28a745; border-radius: 5px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; transition: background-color 0.3s;" data-bs-toggle="modal" data-bs-target="#partnerModal">
-                Be a Partner
+            <button type="button" style="display: inline-block; padding: 15px 30px; font-size: 18px; color: #000000; background-color: #ffffff ; border-radius: 5px; text-decoration: none; font-weight: bold; border: none; cursor: pointer; transition: background-color 0.3s;" data-bs-toggle="modal" data-bs-target="#partnerModal">
+              Be a partner
             </button>
         </div>
     </div>
 
     <div style="margin-bottom: 40px; padding: 20px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #28a745; padding-bottom: 10px;">Terms and Conditions</h2>
-        <ul style="list-style-type: disc; margin-left: 20px; font-size: 16px; color: #cccccc;">
+        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #28a745; padding-bottom: 10px;"><i class="fa fa-handshake"></i>Terms and Conditions</h2>
+        <ul style="list-style-type: disc; margin-left: 20px; font-size: 16px; color: #ffffff;">
             <li style="margin-bottom: 15px;"><strong>Agreement Duration:</strong> The partnership agreement is valid for one year from the date of signing and can be renewed upon mutual consent.</li>
             <li style="margin-bottom: 15px;"><strong>Revenue Sharing:</strong> Partners will receive a commission based on the rental revenue generated through their referrals or services.</li>
             <li style="margin-bottom: 15px;"><strong>Quality Standards:</strong> Partners are required to adhere to our quality standards to ensure that our customers receive exceptional service.</li>
@@ -37,11 +37,11 @@
     </div>
 
     <div style="margin-bottom: 40px; padding: 20px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #ffc107; padding-bottom: 10px;">Roles and Responsibilities</h2>
-        <p style="font-size: 16px; color: #cccccc;">
+        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #ffc107; padding-bottom: 10px;"><i class="fa fa-shield-alt"></i>Roles and Responsibilities</h2>
+        <p style="font-size: 16px; color: #ffffff;">
             As a partner, you will be expected to fulfill the following roles and responsibilities:
         </p>
-        <ul style="list-style-type: disc; margin-left: 20px; font-size: 16px; color: #cccccc;">
+        <ul style="list-style-type: disc; margin-left: 20px; font-size: 16px; color: #ffffff;">
             <li style="margin-bottom: 15px;"><strong>Promotion:</strong> Actively promote Bike Lelo's services through various channels, including your website, social media, and physical locations.</li>
             <li style="margin-bottom: 15px;"><strong>Customer Service:</strong> Provide excellent customer service and assist clients with their bike rental needs.</li>
             <li style="margin-bottom: 15px;"><strong>Reporting:</strong> Regularly report on performance metrics, including customer feedback and sales data.</li>
@@ -51,7 +51,7 @@
     </div>
 
     <div style="padding: 20px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);">
-        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #dc3545; padding-bottom: 10px;">Contact Us</h2>
+        <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #dc3545; padding-bottom: 10px;"><i class="fa fa-envelope"></i>Contact Us</h2>
         <p style="font-size: 16px; color: #cccccc;">
             If you have any questions or need further information, please feel free to contact us at:
         </p>

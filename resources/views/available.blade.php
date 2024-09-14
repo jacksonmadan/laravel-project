@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" style="margin-top: 40px;">
-    <h1 style="text-align: center; color:  #FFFFFF; margin-bottom: 30px;">Available Bikes</h1>
+<h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">Bikes Available</h1>
     <div class="row">
         @foreach ($bikes as $bike)
         <div class="col-md-4" style="display: flex; justify-content: center;">

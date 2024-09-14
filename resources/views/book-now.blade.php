@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container" style="margin-top: 40px;">
-    <h1 style="text-align: center; color: #007bff; margin-bottom: 30px;">Terms and Conditions</h1>
+    <h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">Terms and Conditions</h1>
     <div style="background-color: #f8f9fa; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
         <p>Please read the following terms and conditions carefully before proceeding to book a bike:</p>
         <ul style="list-style-type: disc; margin-left: 20px; color: #343a40;">

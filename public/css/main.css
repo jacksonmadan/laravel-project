@@ -1,5 +1,5 @@
 :root {
-  --card-height: 380px; 
+  --card-height: 500px; 
   --card-width: calc(var(--card-height) / 1.5); 
   --card-margin: 0.5rem; 
   --animation-duration: 80s; 
