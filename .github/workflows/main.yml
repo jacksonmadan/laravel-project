@@ -43,6 +43,10 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: Clear known hosts
+        run: |
+          ssh-keygen -R ${{ secrets.REMOTE_HOST }}
+
       - name: Verify SSH Key
         run: |
           ssh-add -l
