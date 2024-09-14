@@ -54,11 +54,25 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
         run: |
           ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
+            # Ensure proper ownership and permissions
             sudo chown -R $REMOTE_USER:$REMOTE_USER /var/www/html/laravel-project || exit
+            sudo chmod -R u+rwX /var/www/html/laravel-project || exit
+
+            # Navigate to project directory
             cd /var/www/html/laravel-project || exit
+
+            # Configure Git to recognize the directory as safe
             git config --global --add safe.directory /var/www/html/laravel-project || exit
+
+            # Pull latest changes from the repository
             git pull origin main || exit
+
+            # Install PHP dependencies
             composer install --no-interaction --prefer-dist --optimize-autoloader || exit
+
+            # Run database migrations
             php artisan migrate --force || exit
+
+            # Restart the web server
             sudo systemctl restart httpd || exit
           EOF
