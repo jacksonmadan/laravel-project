@@ -54,6 +54,7 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
         run: |
           ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
+            sudo chown -R $REMOTE_USER:$REMOTE_USER /var/www/html/laravel-project || exit
             cd /var/www/html/laravel-project || exit
             git config --global --add safe.directory /var/www/html/laravel-project || exit
             git pull origin main || exit
