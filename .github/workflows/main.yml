@@ -16,7 +16,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3.7'
+          php-version: '8.3'
           extensions: mbstring, xml, curl
 
       - name: Install dependencies
@@ -34,6 +34,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -43,40 +44,17 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
-      - name: Clear known hosts
+      - name: Deploy application via SSH
         run: |
-          ssh-keygen -R ${{ secrets.REMOTE_HOST }}
-
-      - name: Verify SSH Key
-        run: |
-          ssh-add -l
-          ssh -o StrictHostKeyChecking=no -T ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }}
-
-      - name: Deploy to EC2
-        env:
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-        run: |
-          ssh -o StrictHostKeyChecking=no $REMOTE_USER@$REMOTE_HOST << 'EOF'
-            # Ensure proper ownership and permissions
-            sudo chown -R $REMOTE_USER:$REMOTE_USER /var/www/html/laravel-project || exit
-            sudo chmod -R u+rwX /var/www/html/laravel-project || exit
-
-            # Navigate to project directory
-            cd /var/www/html/laravel-project || exit
-
-            # Configure Git to recognize the directory as safe
-            git config --global --add safe.directory /var/www/html/laravel-project || exit
-
-            # Pull latest changes from the repository
-            git pull origin main || exit
-
-            # Install PHP dependencies
-            composer install --no-interaction --prefer-dist --optimize-autoloader || exit
-
-            # Run database migrations
-            php artisan migrate --force || exit
-
-            # Restart the web server
-            sudo systemctl restart httpd || exit
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'EOF'
+            cd /path/to/your/project
+            git pull origin main
+            composer install --no-dev
+            php artisan migrate --force
+            php artisan cache:clear
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
+            php artisan queue:restart
+            exit
           EOF
