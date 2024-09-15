@@ -11,7 +11,7 @@ hi bro this is checking for CI/CD
             {{ session('status') }}
         </div>
     @endif
-
+hello bross how siiii am doinh
     <div style="margin-bottom: 40px; padding: 20px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);">
         <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #007bff; padding-bottom: 10px;"><i class="fa fa-smile"></i>Welcome to Bike Lelo</h2>
         <p style="font-size: 16px; color: #cccccc;">
