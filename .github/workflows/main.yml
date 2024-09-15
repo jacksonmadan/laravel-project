@@ -31,5 +31,5 @@ jobs:
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
             # Restart web server (adjust service name as needed)
-            sudo systemctl restart nginx
+            sudo systemctl restart apache2
           EOF
