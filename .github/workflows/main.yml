@@ -22,37 +22,14 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          set -e  # Exit on any error
-          echo "Starting deployment..."
-
           ssh -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
-            set -e  # Exit on any error
-            echo "Navigating to project directory..."
             cd /var/www/laravel-project
-
-            echo "Pulling latest code..."
             git pull origin main
-
-            echo "Fixing permissions..."
+            composer install --no-dev --optimize-autoloader
+            php artisan migrate --force
+            # Fix permissions
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
-
-            echo "Installing Composer dependencies..."
-            composer install --no-dev --optimize-autoloader || { echo "Composer install failed"; exit 1; }
-
-            echo "Running database migrations..."
-            php artisan migrate --force || { echo "Migrations failed"; exit 1; }
-
-            echo "Restarting web server..."
-            sudo systemctl restart apache2 || { echo "Web server restart failed"; exit 1; }
-
-            echo "Deployment completed successfully."
-          EOF
-
-      - name: Check Deployment Status
-        run: |
-          echo "Checking deployment status..."
-          ssh -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
-            echo "Checking if application is running..."
-            systemctl status apache2 || echo "Web server is not running as expected."
+            # Restart web server (adjust service name as needed)
+            sudo systemctl restart apache2
           EOF
