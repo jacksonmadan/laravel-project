@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-hi i am ankush
+
 <div class="container" style="margin-top: 40px;">
 <h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">About Us</h1>
-
+hi bro this is checking for CI/CD
     <!-- Display Flash Messages -->
     @if(session('status'))
         <div class="alert alert-success" role="alert" style="background-color: #ffffff; color: #000000;">
