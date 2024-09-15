@@ -22,14 +22,37 @@ jobs:
 
       - name: Deploy to Server
         run: |
+          set -e  # Exit on any error
+          echo "Starting deployment..."
+
           ssh -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
+            set -e  # Exit on any error
+            echo "Navigating to project directory..."
             cd /var/www/laravel-project
+
+            echo "Pulling latest code..."
             git pull origin main
+
+            echo "Installing Composer dependencies..."
             composer install --no-dev --optimize-autoloader
+
+            echo "Running database migrations..."
             php artisan migrate --force
-            # Fix permissions
+
+            echo "Fixing permissions..."
             sudo chown -R www-data:www-data storage bootstrap/cache
             sudo chmod -R 775 storage bootstrap/cache
-            # Restart web server (adjust service name as needed)
+
+            echo "Restarting web server..."
             sudo systemctl restart apache2
+
+            echo "Deployment completed successfully."
+          EOF
+
+      - name: Check Deployment Status
+        run: |
+          echo "Checking deployment status..."
+          ssh -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
+            echo "Checking if application is running..."
+            systemctl status apache2 || echo "Web server is not running as expected."
           EOF
