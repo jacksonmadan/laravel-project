@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<p style="color: white;">hello i am ankush</p>
+<p style="color: white;">hello i am ankush2</p>
 <div class="container" style="margin-top: 40px;">
 <h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">About Us</h1>
 hi bro this is checking for CI/CD
