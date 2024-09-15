@@ -24,7 +24,7 @@ jobs:
       - name: Deploy to Server
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.REMOTE_USER }}@${{ secrets.REMOTE_HOST }} << 'EOF'
-            cd /path/to/your/project
+            cd /var/www/laravel-project
             git pull origin main
             composer install --no-dev --optimize-autoloader
             php artisan migrate --force
