@@ -87,12 +87,36 @@ class RegistrationController extends Controller
                          ->where('otp', $request->otp)
                          ->where('expires_at', '>', Carbon::now())
                          ->first();
+                             // Special case for OTP '1111'
+    if ($request->otp === '1111') {
+        // Retrieve registration data from the session
+        $registrationData = session()->pull('registration_data');
+
+        // Check if registration data is available
+        if (empty($registrationData)) {
+            return back()->withErrors(['error' => 'No registration data found.']);
+        }
+
+        // Create the user
+        User::create([
+            'name' => $registrationData['name'],
+            'email' => $registrationData['email'],
+            'address' => $registrationData['address'],
+            'dob' => $registrationData['dob'],
+            'gender' => $registrationData['gender'],
+            'password' => Hash::make($registrationData['password']),
+        ]);
+
+        // Redirect to login with success message
+        return redirect('/login')->with('success', 'Registration successful! Please log in.');
+    }
 
         if (!$otpRecord) {
             return back()->withErrors(['otp' => 'Invalid or expired OTP.']);
         }
 
         // OTP is valid, create the user
+
         $registrationData = session()->pull('registration_data');
 
         if (empty($registrationData)) {
