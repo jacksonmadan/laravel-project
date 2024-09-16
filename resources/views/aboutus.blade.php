@@ -4,7 +4,7 @@
 <p style="color: white;">hello i am ankush2</p>
 <div class="container" style="margin-top: 40px;">
 <h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">About Us</h1>
-hi bro this is checking for CI/CD
+changing this line in about us page 
     <!-- Display Flash Messages -->
     @if(session('status'))
         <div class="alert alert-success" role="alert" style="background-color: #ffffff; color: #000000;">
