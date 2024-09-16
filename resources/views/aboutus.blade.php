@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-<p style="color: white;">hello i am ankush2</p>
+<p style="color: blue;">hello i am ankush2</p>
 <div class="container" style="margin-top: 40px;">
 <h1 style="text-align: center; color: #ffffff; margin-bottom: 30px;">About Us</h1>
-changing this line in about us page 
+changes 
     <!-- Display Flash Messages -->
     @if(session('status'))
         <div class="alert alert-success" role="alert" style="background-color: #ffffff; color: #000000;">
             {{ session('status') }}
         </div>
     @endif
-hello bross how siiii am doinh
+changes
     <div style="margin-bottom: 40px; padding: 20px; background-color: #1a1a1a; border-radius: 8px; box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);">
         <h2 style="font-size: 2rem; margin-bottom: 20px; color: #ffffff; border-bottom: 3px solid #007bff; padding-bottom: 10px;"><i class="fa fa-smile"></i>Welcome to Bike Lelo</h2>
         <p style="font-size: 16px; color: #cccccc;">
